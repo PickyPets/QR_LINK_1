@@ -36,15 +36,16 @@
     </script>
     <style>
         :root {
-            --primary: #8B4513; /* بني خشبي */
-            --secondary: #CD853F; /* بني فاتح */
-            --accent: #DAA520; /* ذهبي */
+            --primary: #d97706;
+            --secondary: #b45309;
+            --accent: #f59e0b;
             --light: #f8f9fa;
-            --dark: #212529;
-            --success: #20bf6b;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --dog-color: #8B4513;
-            --dog-paw: #CD853F;
+            --dark: #1e293b;
+            --success: #10b981;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 255, 255, 0.5);
+            --dog-color: #d97706;
+            --dog-paw: #b45309;
         }
         
         * {
@@ -55,15 +56,20 @@
         }
         
         body {
-            background: linear-gradient(135deg, #5D4037 0%, #8D6E63 100%);
+            background-color: #fffbeb;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(38,100%,74%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(22,100%,77%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(39,100%,70%,1) 0, transparent 50%);
+            background-attachment: fixed;
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             color: var(--dark);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
             overflow-x: hidden;
         }
         
@@ -77,46 +83,43 @@
             width: 100%;
             max-width: 500px;
             background: var(--card-bg);
-            border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--card-border) inset;
             overflow: hidden;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
         }
         
-        .container::before {
+        .header {
+            background: linear-gradient(135deg, rgba(217,119,6,0.9) 0%, rgba(180,83,9,0.9) 100%);
+            color: white;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .header::before {
             content: "";
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            z-index: -1;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            z-index: 1;
             pointer-events: none;
+            animation: pulseLight 4s infinite alternate;
         }
         
-        .header {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 35px 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.2;
+        @keyframes pulseLight {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.05); }
         }
         
         .header h1 {
@@ -124,34 +127,35 @@
             margin-bottom: 12px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             position: relative;
             z-index: 2;
         }
         
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 80%;
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 85%;
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            font-weight: 500;
         }
         
         .content {
-            padding: 35px 30px;
+            padding: 40px 30px;
             position: relative;
         }
         
         .form-container, .data-container {
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .form-container h2, .welcome-text {
             text-align: center;
-            margin-bottom: 25px;
-            color: var(--primary);
-            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-weight: 800;
             font-size: 1.8rem;
             position: relative;
             padding-bottom: 15px;
@@ -163,13 +167,12 @@
             bottom: 0;
             right: 50%;
             transform: translateX(50%);
-            width: 80px;
+            width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
             border-radius: 10px;
         }
         
-        /* استايل نموذج الإدخال */
         .form-container {
             display: flex;
             flex-direction: column;
@@ -183,13 +186,13 @@
         }
         
         .input-group label {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #555;
-            padding-right: 10px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #334155;
+            padding-right: 5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
         .input-wrapper {
@@ -198,32 +201,47 @@
         
         .input-group input, .input-group textarea {
             padding: 16px 50px 16px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
             font-size: 1.1rem;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            color: var(--dark);
+        }
+        
+        .input-group input::placeholder, .input-group textarea::placeholder {
+            color: #94a3b8;
         }
         
         .input-group input:focus, .input-group textarea:focus {
-            border-color: var(--primary);
+            border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(139, 69, 19, 0.15);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
         }
         
         .input-icon {
             position: absolute;
             top: 18px;
             left: 18px;
-            color: #aaa;
+            color: var(--primary);
             font-size: 1.2rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
         }
         
-        /* تعديلات خاصة بحقل الملاحظات */
+        .input-group input:focus + .input-icon,
+        .input-group textarea:focus + .input-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
         .input-group textarea {
-            min-height: 100px;
+            min-height: 120px;
             resize: vertical;
             padding-right: 20px;
             padding-left: 50px;
@@ -236,51 +254,49 @@
         }
         
         .btn {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 1.25rem;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 15px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4), 0 8px 10px -6px rgba(217, 119, 6, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            z-index: 1;
         }
         
-        .btn::after {
+        .btn::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 40%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(25deg);
-            transition: all 0.6s;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            opacity: 0;
         }
         
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(139, 69, 19, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(217, 119, 6, 0.5), 0 10px 10px -5px rgba(217, 119, 6, 0.3);
         }
         
-        .btn:hover::after {
-            left: 120%;
+        .btn:hover::before {
+            opacity: 1;
         }
         
-        .btn i {
-            margin-left: 8px;
+        .btn:active {
+            transform: translateY(1px);
         }
         
-        /* استايل عرض البيانات */
         .data-container {
             display: none;
             flex-direction: column;
@@ -290,231 +306,206 @@
         }
         
         .avatar {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: -75px;
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-top: -90px;
+            border: 6px solid #fffbeb;
+            box-shadow: 0 15px 35px rgba(217, 119, 6, 0.3);
             position: relative;
             z-index: 3;
-            animation: pulse 2s infinite;
+            animation: floatAvatar 6s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0px rgba(139, 69, 19, 0.5); }
-            100% { box-shadow: 0 0 0 20px rgba(139, 69, 19, 0); }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .avatar i {
-            font-size: 3.8rem;
+            font-size: 4rem;
             color: white;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
         }
         
         .user-info {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
         .info-card {
-            background: white;
-            border-radius: 18px;
-            padding: 22px;
-            margin: 18px 0;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
             text-align: right;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border-right: 5px solid var(--primary);
-            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255,255,255,0.5);
+            border: 1px solid var(--card-border);
+            border-right: 6px solid var(--primary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
         
-        .info-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-        }
-        
         .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
         }
         
         .info-card h3 {
             color: var(--primary);
-            margin-bottom: 12px;
-            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 800;
         }
         
         .info-card h3 i {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            opacity: 0.9;
         }
         
         .info-card p {
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.7rem;
+            font-weight: 800;
             color: var(--dark);
             direction: ltr;
+            letter-spacing: 0.5px;
         }
         
         .notes-card p {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.25rem;
+            font-weight: 600;
             direction: rtl;
             text-align: right;
             white-space: pre-wrap;
-            line-height: 1.6;
-        }
-        
-        .welcome-text {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-top: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .action-btn {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 14px 30px;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
-        }
-        
-        .action-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.25);
+            line-height: 1.7;
+            color: #475569;
         }
         
         .footer {
             text-align: center;
-            padding: 22px;
-            color: #777;
-            font-size: 0.95rem;
-            border-top: 1px solid #eee;
-            background: rgba(248, 249, 250, 0.8);
+            padding: 25px;
+            color: #64748b;
+            font-size: 1rem;
+            font-weight: 600;
+            border-top: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
         }
         
         .floating-element {
             position: absolute;
             z-index: 1;
-            opacity: 0.3;
-            animation: float 15s infinite linear;
+            opacity: 0.4;
+            animation: float 20s infinite linear;
+            filter: blur(2px);
         }
         
         .circle {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), var(--dog-color));
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.1));
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
         
         .dog-paw {
-            width: 80px;
-            height: 80px;
-            background: var(--dog-paw);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(180, 83, 9, 0.3) 0%, transparent 70%);
             border-radius: 50%;
             position: relative;
-            animation: pulse 2s infinite;
+            animation: floatPaw 15s infinite ease-in-out;
+        }
+        
+        @keyframes floatPaw {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(15deg) scale(1.1); }
         }
         
         .dog-paw::before,
         .dog-paw::after {
             content: "";
             position: absolute;
-            background: var(--dog-paw);
+            background: radial-gradient(circle, rgba(180, 83, 9, 0.3) 0%, transparent 70%);
             border-radius: 50%;
         }
         
         .dog-paw::before {
-            width: 40px;
-            height: 40px;
-            top: -15px;
-            left: 20px;
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            left: 25px;
         }
         
         .dog-paw::after {
-            width: 40px;
-            height: 40px;
-            top: -15px;
-            right: 20px;
-        }
-        
-        .dog-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            right: 25px;
         }
         
         @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, 40px) rotate(90deg); }
-            50% { transform: translate(40px, 0) rotate(180deg); }
-            75% { transform: translate(20px, -40px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            33% { transform: translate(30px, -50px) rotate(120deg) scale(1.1); }
+            66% { transform: translate(-20px, 20px) rotate(240deg) scale(0.9); }
+            100% { transform: translate(0, 0) rotate(360deg) scale(1); }
         }
         
         .contact-instruction {
             text-align: center;
             margin-top: -15px;
-            margin-bottom: 25px;
-            color: #555;
-            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #64748b;
+            font-size: 1.15rem;
             padding: 0 20px;
+            font-weight: 600;
         }
         
         .storage-info {
-            background: #e8f4ff;
-            border-radius: 12px;
-            padding: 12px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 16px;
+            padding: 15px;
             margin-top: 20px;
             text-align: center;
-            font-size: 0.9rem;
-            color: #2c6db3;
-            border: 1px solid #a9d0ff;
+            font-size: 0.95rem;
+            color: #b45309;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .loading {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px;
+            gap: 20px;
         }
         
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(139, 69, 19, 0.2);
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(217, 119, 6, 0.1);
             border-radius: 50%;
             border-top: 4px solid var(--primary);
-            animation: spin 1s linear infinite;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
         
         @keyframes spin {
@@ -522,124 +513,165 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* تصميم الكلب التفاعلي */
+        /* Interactive Dog Styles */
         .interactive-dog {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            z-index: 5;
+            bottom: 30px;
+            right: 30px;
+            z-index: 10;
             cursor: pointer;
-            transition: all 0.4s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+        
+        .interactive-dog:hover {
+            transform: scale(1.05) translateY(-10px);
         }
         
         .dog-body {
-            width: 150px;
-            height: 100px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-            border-radius: 70px 70px 40px 40px;
+            width: 160px;
+            height: 110px;
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            border-radius: 80px 80px 45px 45px;
             position: relative;
-            animation: dogFloat 4s infinite ease-in-out;
+            animation: dogFloat 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2), inset 5px 5px 15px rgba(255,255,255,0.2);
         }
         
         .dog-head {
-            width: 90px;
-            height: 80px;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            width: 100px;
+            height: 90px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             border-radius: 50%;
             position: absolute;
-            top: -40px;
+            top: -45px;
             left: 30px;
+            box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1), inset 3px 3px 10px rgba(255,255,255,0.3);
         }
         
         .dog-ear {
             position: absolute;
-            width: 40px;
-            height: 50px;
-            background: #8B4513;
-            top: -30px;
+            width: 45px;
+            height: 55px;
+            background: #b45309;
+            top: -35px;
             border-radius: 50% 50% 0 0;
+            box-shadow: inset -2px -2px 5px rgba(0,0,0,0.2);
         }
         
         .dog-ear.left {
             left: 15px;
-            transform: rotate(-10deg);
+            transform: rotate(-15deg);
+            transform-origin: bottom right;
+            animation: earFlickLeft 5s infinite;
         }
         
         .dog-ear.right {
             right: 15px;
-            transform: rotate(10deg);
+            transform: rotate(15deg);
+            transform-origin: bottom left;
+            animation: earFlickRight 5s infinite 0.5s;
+        }
+        
+        @keyframes earFlickLeft {
+            0%, 90%, 100% { transform: rotate(-15deg); }
+            95% { transform: rotate(-25deg); }
+        }
+        
+        @keyframes earFlickRight {
+            0%, 90%, 100% { transform: rotate(15deg); }
+            95% { transform: rotate(25deg); }
         }
         
         .dog-eye {
             position: absolute;
-            width: 18px;
-            height: 18px;
-            background: #333;
+            width: 20px;
+            height: 20px;
+            background: #1e293b;
             border-radius: 50%;
-            top: 25px;
+            top: 30px;
         }
         
-        .dog-eye.left {
-            left: 25px;
+        .dog-eye::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            top: 4px;
+            right: 4px;
         }
         
-        .dog-eye.right {
-            right: 25px;
+        .dog-eye.left { left: 25px; }
+        .dog-eye.right { right: 25px; }
+        
+        .interactive-dog:hover .dog-eye {
+            transform: scaleY(0.2);
         }
         
         .dog-nose {
             position: absolute;
-            width: 20px;
-            height: 15px;
-            background: #333;
+            width: 24px;
+            height: 16px;
+            background: #1e293b;
             border-radius: 50%;
-            top: 45px;
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
         }
         
         .dog-mouth {
             position: absolute;
-            width: 40px;
-            height: 20px;
-            border-bottom: 3px solid #333;
+            width: 45px;
+            height: 22px;
+            border-bottom: 3px solid #1e293b;
             border-radius: 0 0 50% 50%;
-            top: 55px;
+            top: 60px;
             left: 50%;
             transform: translateX(-50%);
+            transition: all 0.3s;
+        }
+        
+        .interactive-dog:hover .dog-mouth {
+            height: 30px;
+            border-bottom: 4px solid #1e293b;
+            background-color: #ef4444;
         }
         
         .dog-tail {
             position: absolute;
-            width: 70px;
-            height: 20px;
-            background: #8B4513;
-            border-radius: 10px;
-            right: -60px;
-            top: 30px;
-            transform-origin: left;
-            animation: tailMove 3s infinite ease-in-out;
+            width: 75px;
+            height: 22px;
+            background: linear-gradient(90deg, #b45309 0%, #d97706 100%);
+            border-radius: 11px;
+            right: -65px;
+            top: 35px;
+            transform-origin: left center;
+            animation: tailWag 0.5s infinite alternate ease-in-out;
         }
         
         .dog-paw-btn {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background: var(--dog-paw);
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
             border-radius: 50%;
-            top: -20px;
-            right: 40px;
+            top: -25px;
+            right: 45px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 10;
+            border: 3px solid #fffbeb;
         }
         
         .dog-paw-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 12px 25px rgba(217, 119, 6, 0.5);
         }
         
         .dog-paw-btn i {
@@ -649,21 +681,22 @@
         
         .claw {
             position: absolute;
-            width: 5px;
-            height: 15px;
+            width: 6px;
+            height: 18px;
             background: #fff;
-            border-radius: 5px;
-            bottom: -10px;
+            border-radius: 6px;
+            bottom: -12px;
             transform-origin: top;
             opacity: 0;
+            transition: all 0.2s;
         }
         
-        .claw-1 { left: 10px; }
-        .claw-2 { left: 22px; }
-        .claw-3 { left: 35px; }
+        .claw-1 { left: 12px; }
+        .claw-2 { left: 24px; }
+        .claw-3 { left: 37px; }
         
         .dog-paw-btn:hover .claw {
-            animation: clawOut 0.5s forwards;
+            animation: clawOut 0.4s forwards cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         @keyframes clawOut {
@@ -676,41 +709,18 @@
             50% { transform: translateY(-15px); }
         }
         
-        @keyframes tailMove {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
+        @keyframes tailWag {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(20deg); }
         }
         
-        /* تصميم مخالب للأيقونات */
         .icon-claw {
             position: relative;
             display: inline-block;
-            width: 24px;
-            height: 24px;
-        }
-        
-        .icon-claw::before {
-            content: "";
-            position: absolute;
-            width: 8px;
-            height: 20px;
-            background: #8B4513;
-            border-radius: 4px;
-            top: 2px;
-            left: 4px;
-            transform: rotate(-20deg);
-        }
-        
-        .icon-claw::after {
-            content: "";
-            position: absolute;
-            width: 8px;
-            height: 20px;
-            background: #8B4513;
-            border-radius: 4px;
-            top: 2px;
-            right: 4px;
-            transform: rotate(20deg);
+            width: 28px;
+            height: 28px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 8px;
         }
         
         .claw-icon {
@@ -718,55 +728,55 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 12px;
-            color: #fff;
+            font-size: 14px;
+            color: var(--primary);
             z-index: 2;
         }
         
-        /* أزرار على شكل كفوف */
         .paw-button {
             position: relative;
-            width: 60px;
-            height: 60px;
-            background: var(--dog-paw);
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid #fffbeb;
         }
         
         .paw-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(217, 119, 6, 0.5);
         }
         
         .paw-button i {
-            font-size: 24px;
+            font-size: 26px;
             color: #fff;
         }
         
         .paw-button .claw {
             position: absolute;
             width: 6px;
-            height: 20px;
+            height: 22px;
             background: #fff;
-            border-radius: 5px;
-            bottom: -8px;
+            border-radius: 6px;
+            bottom: -10px;
             transform-origin: top;
             opacity: 0;
         }
         
         .paw-button:hover .claw {
-            animation: clawOut 0.5s forwards;
+            animation: clawOut 0.4s forwards cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .paw-button .claw-1 { left: 12px; }
-        .paw-button .claw-2 { left: 27px; }
-        .paw-button .claw-3 { left: 42px; }
+        .paw-button .claw-1 { left: 14px; }
+        .paw-button .claw-2 { left: 29px; }
+        .paw-button .claw-3 { left: 45px; }
         
-        /* تعديلات للكلاب */
         .dog-elements {
             position: absolute;
             top: 0;
@@ -775,51 +785,29 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
         
         .dog-face-element {
             position: absolute;
-            font-size: 40px;
-            opacity: 0.1;
+            font-size: 45px;
+            opacity: 0.15;
             animation: float 25s infinite linear;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
         
         @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .content {
-                padding: 25px 20px;
-            }
-            
-            .avatar {
-                width: 110px;
-                height: 110px;
-                margin-top: -65px;
-            }
-            
-            .avatar i {
-                font-size: 3rem;
-            }
-            
-            .welcome-text {
-                font-size: 1.7rem;
-            }
-            
-            .info-card p {
-                font-size: 1.4rem;
-            }
-            
-            .interactive-dog {
-                transform: scale(0.8);
-                bottom: 10px;
-                right: 10px;
-            }
+            .container { border-radius: 24px; }
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 2.1rem; }
+            .header p { font-size: 1.05rem; }
+            .content { padding: 30px 20px; }
+            .avatar { width: 120px; height: 120px; margin-top: -70px; }
+            .avatar i { font-size: 3.2rem; }
+            .welcome-text { font-size: 1.6rem; }
+            .info-card p { font-size: 1.5rem; }
+            .interactive-dog { transform: scale(0.7); bottom: 10px; right: 10px; }
+            .interactive-dog:hover { transform: scale(0.75) translateY(-10px); }
         }
     </style>
 </head>
